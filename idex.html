@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfólio | Luiz Fernando</title>
+  
+  <!-- Fonte Moderna (Outfit) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #09090b;
+      --card-bg: rgba(255, 255, 255, 0.03);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text-main: #f4f4f5;
+      --text-muted: #a1a1aa;
+      --gradient-start: #8b5cf6; /* Roxo */
+      --gradient-end: #3b82f6;   /* Azul */
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      /* Fundo com leve textura/brilho */
+      background-image: radial-gradient(circle at 15% 50%, rgba(139, 92, 246, 0.08), transparent 25%),
+                        radial-gradient(circle at 85% 30%, rgba(59, 130, 246, 0.08), transparent 25%);
+    }
+
+    /* Animação de entrada */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: minmax(200px, auto);
+      gap: 24px;
+      max-width: 1000px;
+      width: 100%;
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+
+    /* Estilos dos Cartões (Glassmorphism) */
+    .bento-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .bento-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Ocupação no Grid (Desktop) */
+    .hero-card { grid-column: span 2; grid-row: span 2; justify-content: center; }
+    .about-card { grid-column: span 1; grid-row: span 2; }
+    .skills-card { grid-column: span 2; }
+    .project-card { grid-column: span 1; }
+    .contact-card { grid-column: span 3; flex-direction: row; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;}
+
+    /* Tipografia Especial */
+    .gradient-text {
+      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: inline-block;
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 12px;
+      letter-spacing: -1px;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--text-main);
+    }
+
+    .subtitle {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      font-weight: 400;
+      margin-bottom: 24px;
+    }
+
+    .avatar-img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #3b82f6;
+      margin-bottom: 15px;
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+    }
+
+    p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+    }
+
+    /* Habilidades */
+    .skills-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: auto;
+    }
+
+    .skill-pill {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 8px 16px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-main);
+      transition: all 0.3s;
+    }
+
+    .skill-pill:hover {
+      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+      border-color: transparent;
+      transform: translateY(-2px);
+    }
+
+    /* Botões e Links */
+    .social-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .social-btn {
+      text-decoration: none;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .social-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .action-btn {
+      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.3s, transform 0.2s;
+      font-family: inherit;
+    }
+
+    .action-btn:hover {
+      opacity: 0.9;
+      transform: scale(1.02);
+    }
+
+    .action-btn:active {
+      transform: scale(0.98);
+    }
+
+    #mensagem-surpresa {
+      margin-top: 12px;
+      font-size: 0.95rem;
+      color: #a78bfa; /* Roxo claro */
+      font-weight: 600;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      position: absolute;
+    }
+
+    footer {
+      margin-top: 40px;
+      color: #52525b;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    /* Responsividade */
+    @media (max-width: 850px) {
+      .bento-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .hero-card, .skills-card, .contact-card { grid-column: span 2; }
+      .about-card, .project-card { grid-column: span 2; grid-row: auto; }
+      h1 { font-size: 2.8rem; }
+    }
+
+    @media (max-width: 500px) {
+      .bento-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-card, .skills-card, .contact-card { grid-column: span 1; }
+      .contact-card { flex-direction: column; align-items: flex-start; }
+      h1 { font-size: 2.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="bento-grid">
+    
+    <!-- 1. Hero Card -->
+    <div class="bento-card hero-card">
+      <img src="1000001201.jpg" alt="Luiz Fernando" class="avatar-img">
+      <h1>Olá, eu sou<br><span class="gradient-text">Luiz Fernando</span></h1>
+      <p class="subtitle">Desenvolvedor & Estudante de Técnico em Informática para Internet</p>
+    </div>
+
+    <!-- 2. About Card -->
+    <div class="bento-card about-card">
+      <h2>Sobre mim</h2>
+      <p>Sou um estudante curioso, sempre em busca de aprender novas tecnologias. Gosto muito de desenvolvimento de jogos, programação e de jogar vôlei nas horas vagas.</p>
+    </div>
+
+    <!-- 3. Skills Card -->
+    <div class="bento-card skills-card">
+      <h2>Habilidades Principais</h2>
+      <p style="margin-bottom: 20px;">Tecnologias e vivências que venho aprimorando:</p>
+      <div class="skills-wrapper">
+        <span class="skill-pill">HTML5</span>
+        <span class="skill-pill">CSS3</span>
+        <span class="skill-pill">Portugol</span>
+        <span class="skill-pill">Experiência em Vendas</span>
+        <span class="skill-pill">Lógica de Programação</span>
+      </div>
+    </div>
+
+    <!-- 4. Project Card -->
+    <div class="bento-card project-card">
+      <h2>Meu Jogo</h2>
+      <p style="margin-bottom: 12px; color: var(--text-main); font-weight: 600;">Jovens Titãs 🎮</p>
+      <p>Um jogo divertido inspirado nos Jovens Titãs, que desenvolvi durante a aula para praticar minha lógica.</p>
+    </div>
+
+    <!-- 5. Contact Card -->
+    <div class="bento-card contact-card">
+      <div>
+        <h2>Vamos conversar?</h2>
+        <div class="social-links">
+          <a href="https://github.com/luizfbreis-hash" target="_blank" class="social-btn">GitHub</a>
+          <a href="https://www.linkedin.com/feed/" target="_blank" class="social-btn">LinkedIn</a>
+          <a href="https://www.instagram.com/luiz05929/" target="_blank" class="social-btn">Instagram</a>
+        </div>
+      </div>
+      
+      <div style="position: relative; display: flex; flex-direction: column; align-items: center;">
+        <button class="action-btn" onclick="revelarSurpresa()">Clique Aqui</button>
+        <span id="mensagem-surpresa"></span>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>Design inspirado no Figma • Feito por Luiz Fernando • 2026</p>
+  </footer>
+
+  <script>
+    function revelarSurpresa() {
+      const msg = document.getElementById("mensagem-surpresa");
+      msg.textContent = "🚀 Obrigado pela visita!";
+      msg.style.position = "relative";
+      msg.style.marginTop = "12px";
+      setTimeout(() => {
+        msg.style.opacity = "1";
+      }, 50);
+    }
+  </script>
+</body>
+</html>
